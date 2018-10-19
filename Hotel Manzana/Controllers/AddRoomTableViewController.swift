@@ -12,12 +12,8 @@ class AddRoomTableViewController: UITableViewController {
     var roomTypes: [RoomType] = []
     var currentRoomType: RoomType?
     
-    @IBOutlet weak var doneButton: UIBarButtonItem!
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        doneButton.title = "Готово"
     }
 
     // MARK: - Table view data source

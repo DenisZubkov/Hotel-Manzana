@@ -27,9 +27,6 @@ class AddRegistrationTableViewController: UITableViewController {
     @IBOutlet weak var wifiSwitch: UISwitch!
     @IBOutlet weak var roomTypeLabel: UILabel!
     
-    @IBOutlet weak var doneButton: UIBarButtonItem!
-    @IBOutlet weak var cancelButton: UIBarButtonItem!
-    
     let checkInDatePickerCellIndexPath = IndexPath(row: 1, section: 1)
     let checkOutDatePickerCellIndexPath = IndexPath(row: 3, section: 1)
     var roomTypes: [RoomType] = []
@@ -64,8 +61,6 @@ class AddRegistrationTableViewController: UITableViewController {
     }
     
     func setupRegistrationForm() {
-        doneButton.title = "Готово"
-        cancelButton.title = "Прервать"
         let midnightToday = Calendar.current.startOfDay(for: Date())
         checkInDatePicker.minimumDate = midnightToday
         checkInDatePicker.date = midnightToday

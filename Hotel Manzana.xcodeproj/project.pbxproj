@@ -41,6 +41,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7A32F69D217A69DF000A6054 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7AD0144B2178F81C00148ED2 /* Registration.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7A32F69E217A69ED000A6054 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				7AD0144D2178FFFB00148ED2 /* AddRegistrationTableViewController.swift */,
+				7A32F6992179E1B6000A6054 /* AddRoomTableViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		7A32F69F217A69FA000A6054 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7A32F69B2179F2A5000A6054 /* RoomTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		7AD0142D2178F78E00148ED2 = {
 			isa = PBXGroup;
 			children = (
@@ -61,11 +86,10 @@
 			isa = PBXGroup;
 			children = (
 				7AD014392178F78E00148ED2 /* AppDelegate.swift */,
-				7AD0144B2178F81C00148ED2 /* Registration.swift */,
 				7AD0143D2178F78E00148ED2 /* Main.storyboard */,
-				7A32F69B2179F2A5000A6054 /* RoomTableViewCell.swift */,
-				7A32F6992179E1B6000A6054 /* AddRoomTableViewController.swift */,
-				7AD0144D2178FFFB00148ED2 /* AddRegistrationTableViewController.swift */,
+				7A32F69D217A69DF000A6054 /* Model */,
+				7A32F69F217A69FA000A6054 /* Views */,
+				7A32F69E217A69ED000A6054 /* Controllers */,
 				7AD014402178F79100148ED2 /* Assets.xcassets */,
 				7AD014422178F79100148ED2 /* LaunchScreen.storyboard */,
 				7AD014452178F79100148ED2 /* Info.plist */,
