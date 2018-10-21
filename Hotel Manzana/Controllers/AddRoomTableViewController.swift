@@ -14,6 +14,7 @@ class AddRoomTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
     }
 
     // MARK: - Table view data source

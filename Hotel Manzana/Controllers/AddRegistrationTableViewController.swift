@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddRegistrationTableViewController: UITableViewController {
+class AddRegistrationTableViewController: UITableViewController, UITextFieldDelegate {
 
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
@@ -49,7 +49,26 @@ class AddRegistrationTableViewController: UITableViewController {
         loadRoomTypes()
         setupRegistrationForm()
         updateDateViews()
+        firstNameTextField.delegate = self
+        lastNameTextField.delegate = self
+        emailTextField.delegate = self
         
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        isCheckInDatePickerShow = false
+        isCheckOutDatePickerShow = false
+        tableView.beginUpdates()
+        tableView.endUpdates()
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textField.resignFirstResponder()
     }
     
     func loadRoomTypes() {
@@ -78,6 +97,7 @@ class AddRegistrationTableViewController: UITableViewController {
         
         wifiSwitch.isOn = false
         roomTypeLabel.text = "Не указан"
+        
     }
     
     func updateDateViews() {
@@ -112,6 +132,15 @@ class AddRegistrationTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if firstNameTextField.isEditing && indexPath.section > 0 {
+            firstNameTextField.resignFirstResponder()
+        }
+        if lastNameTextField.isEditing && indexPath.section > 0 {
+            lastNameTextField.resignFirstResponder()
+        }
+        if emailTextField.isEditing && indexPath.section > 0 {
+            emailTextField.resignFirstResponder()
+        }
         tableView.deselectRow(at: indexPath, animated: true)
         switch (indexPath.section, indexPath.row) {
         case (checkInDatePickerCellIndexPath.section, checkInDatePickerCellIndexPath.row - 1):
@@ -141,6 +170,13 @@ class AddRegistrationTableViewController: UITableViewController {
         tableView.endUpdates()
     }
     
+    func showMessage(title: String, message: String) {
+        let alertData = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alertData.addAction(cancelAction)
+        present(alertData, animated: true, completion: nil)
+    }
+    
     @IBAction func doneBarButtonTapped(_ sender: UIBarButtonItem) {
         let firstName = firstNameTextField.text ?? ""
         let lastName = lastNameTextField.text ?? ""
@@ -148,6 +184,7 @@ class AddRegistrationTableViewController: UITableViewController {
         
         let dateFormater = DateFormatter()
         dateFormater.dateStyle = .medium
+        dateFormater.locale = Locale(identifier: "ru_RU")
         let checkInDate = dateFormater.string(from: checkInDatePicker.date)
         let checkOutDate = dateFormater.string(from: checkOutDatePicker.date)
         
@@ -166,7 +203,10 @@ class AddRegistrationTableViewController: UITableViewController {
         print("Количество взрослых: \(numberOfAdults)")
         print("Количество детей: \(numberOfChildrens)")
         print("Wi-fi: \(wifiEnabled)")
-        print("Номер: \(roomType)")
+        print("Тип номера: \(roomType)")
+        
+        let message  = "Имя: \(firstName)\nФамилия:\(lastName)\nEmail: \(email)\nДата заезда: \(checkInDate)\nДата выезда: \(checkOutDate)\nКоличество взрослых: \(numberOfAdults)\nКоличество детей: \(numberOfChildrens)\nWi-fi: \(wifiEnabled)\nТип номера: \(roomType)"
+        showMessage(title: "Регистрация", message: message)
     }
     
     @IBAction func datePickerValueChanged(_ sender: UIDatePicker) {
